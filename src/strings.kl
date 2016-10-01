@@ -1,5 +1,6 @@
-PROGRAM strlib
+PROGRAM strings
 %NOLOCKGROUP
+
 -- Public: Takes a string and a separator and splits it into an array
 --
 -- str : STRING - the STRING to separate
@@ -157,4 +158,4 @@ ROUTINE esc_quotes(s : STRING) : STRING
   END esc_quotes
 
 BEGIN
-END strlib
+END strings
