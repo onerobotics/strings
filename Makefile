@@ -17,7 +17,7 @@ todo:
 	grep -i "todo" src/*.*
 
 test:
-	@curl -s http://localhost/karel/kunit?filenames=test_strlib
+	@curl -s http://localhost/karel/kunit?filenames=test_strings
 
 deploy:
 	ftp -s:deploy.ftp localhost

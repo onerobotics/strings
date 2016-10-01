@@ -1,8 +1,8 @@
-PROGRAM test_strlib
+PROGRAM test_strings
 %NOLOCKGROUP
 
 %INCLUDE includes/vendor/kunit.h
-%INCLUDE includes/strlib.h
+%INCLUDE includes/strings.h
 
 ROUTINE t_split_str : BOOLEAN
   VAR
@@ -81,4 +81,4 @@ BEGIN
   kunit_test('p_to_s()', t_p_to_s)
   kunit_test('esc_quotes()', t_esc_quotes)
   kunit_done
-END test_strlib
+END test_strings
