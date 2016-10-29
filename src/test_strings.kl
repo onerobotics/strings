@@ -71,6 +71,19 @@ ROUTINE t_esc_quotes : BOOLEAN
     RETURN(kunit_eq_str('\"test\"', esc_quotes('"test"')))
   END t_esc_quotes
 
+ROUTINE t_splitStr
+VAR
+	o : ARRAY[4] OF STRING[16]
+BEGIN
+	split_str('Server: KHTTPD/0.1', ':', o)
+	kunit_test('first one', kunit_eq_str('Server', o[1]))
+	kunit_test('second one', kunit_eq_str(' KHTTPD/0.1', o[2]))
+
+	split_str('fooBARbaz', 'BAR', o)
+	kunit_test('first=foo', kunit_eq_str('foo', o[1]))
+	kunit_test('second=baz', kunit_eq_str('baz', o[2]))
+END t_splitStr
+
 BEGIN
   kunit_test('split_str()', t_split_str)
   kunit_test('lstrip()', t_lstrip)
@@ -80,5 +93,7 @@ BEGIN
   kunit_test('r_to_s()', t_r_to_s)
   kunit_test('p_to_s()', t_p_to_s)
   kunit_test('esc_quotes()', t_esc_quotes)
+
+  t_splitStr
   kunit_done
 END test_strings

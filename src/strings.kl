@@ -14,31 +14,28 @@ PROGRAM strings
 -- Returns an ARRAY[16] of STRING[16]
 ROUTINE split_str(str:STRING; sep:STRING; out:ARRAY[*] OF STRING)
   VAR
-    tmp : STRING[254]
     i   : INTEGER
     k   : INTEGER
+	start    : INTEGER
   BEGIN
     k = 1
-    tmp = ''
 
     -- initialize the whole out array to ''
     FOR i = 1 TO array_len(out) DO
       out[i] = ''
     ENDFOR
 
-    FOR i = 1 TO STR_LEN(str) DO
-      IF (i = STR_LEN(str)) AND (SUB_STR(str,i,1) <> sep) THEN
-        tmp = tmp + SUB_STR(str,i,1)
-      ENDIF
+	start = 1
 
-      IF (SUB_STR(str,i,1) = sep) OR (i = STR_LEN(str)) THEN
-        out[k] = tmp
-        k = k + 1
-        tmp = ''
-      ELSE
-        tmp = tmp + SUB_STR(str,i,1)
-      ENDIF
+    FOR i = 1 TO (STR_LEN(str)-STR_LEN(sep)) DO
+		IF (SUB_STR(str, i, STR_LEN(sep))=sep) THEN
+			out[k] = SUB_STR(str, start, (i-start))
+			k = k + 1
+			start = i+STR_LEN(sep)
+		ENDIF
     ENDFOR
+
+	out[k] = SUB_STR(str, start, (STR_LEN(str)-start+1))
   END split_str
 
 -- strip whitespace from left side of string
